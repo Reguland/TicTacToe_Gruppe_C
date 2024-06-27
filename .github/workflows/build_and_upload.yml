@@ -15,7 +15,7 @@ on:
   push:
     branches: [ "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   # Möglichkeit den Worklow auch manuell anzustoßen
   workflow_dispatch:
 
