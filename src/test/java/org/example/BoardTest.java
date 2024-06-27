@@ -1,10 +1,6 @@
 package org.example;
-
 import org.junit.*;
-import org.example.Board;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 public class BoardTest {
     @Test
     public void Test_isPositionEmpty_Positive() {
@@ -44,6 +40,34 @@ public class BoardTest {
         Player anotherPlayer = new Player('O', "AnotherPlayer");
         board.placeTic(anotherPlayer, 1, 1);
         assertNotEquals(anotherPlayer.getSymbol(), board.getBoard()[1][1], "The position (1,1) should not be changed by another player");
+    }
+    @Test
+    public void Test_checkWin() {
+        Board board = new Board();
+        Player player = new Player('X', "TestPlayer");
+
+        board.placeTic(player, 0, 0);
+        board.placeTic(player, 0, 1);
+        board.placeTic(player, 0, 2);
+        assertTrue(board.checkWin(player.getSymbol()), "The player should win in the first row");
+
+        board = new Board();
+        board.placeTic(player, 0, 0);
+        board.placeTic(player, 1, 0);
+        board.placeTic(player, 2, 0);
+        assertTrue(board.checkWin(player.getSymbol()), "The player should win in the first column");
+
+        board = new Board();
+        board.placeTic(player, 0, 0);
+        board.placeTic(player, 1, 1);
+        board.placeTic(player, 2, 2);
+        assertTrue(board.checkWin(player.getSymbol()), "The player should win in the diagonal");
+
+        board = new Board();
+        board.placeTic(player, 0, 0);
+        board.placeTic(player, 1, 1);
+        board.placeTic(player, 2, 0);
+        assertFalse(board.checkWin(player.getSymbol()), "The player should not win");
     }
 
 }
